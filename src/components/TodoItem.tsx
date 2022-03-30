@@ -11,9 +11,6 @@ export const TodoItem: FC<TodoItemProps> = ({todo, removeTodo}) => {
     const checker = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(!ischecked)
     }
-    const removeItem = (e:React.MouseEvent<HTMLButtonElement>) => {
-        removeTodo(todo);
-    }
     return (
         <div className='todo-item'>
             <input className='check' onChange={checker} checked={ischecked} type="checkbox"/>
@@ -21,7 +18,7 @@ export const TodoItem: FC<TodoItemProps> = ({todo, removeTodo}) => {
                 textDecoration: ischecked ? "line-through" : 'none',
                 color: ischecked ? "gray" : '#811654'
             }}>{todo.title}</div>
-            <button onClick={removeItem} className='delete-button'>✖</button>
+            <button onClick={()=>removeTodo(todo)} className='delete-button'>✖</button>
         </div>
     );
 };

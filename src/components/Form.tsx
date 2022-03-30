@@ -1,30 +1,27 @@
 import React, {FC, useState} from 'react';
 import {ITodoItem} from "../types/types";
-interface FormProps{
-    addTodo:(todo:ITodoItem)=>void;
+
+interface FormProps {
+    addTodo: (title: string, e: React.FormEvent<HTMLFormElement>) => void;
 }
-export const Form:FC<FormProps> = ({addTodo}) => {
+
+export const Form: FC<FormProps> = ({addTodo}) => {
     const [title, setTitle] = useState<string>('');
-    const changeHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
     }
-    const createTodo = (e:React.KeyboardEvent) => {
-        if(e.key==='Enter' && title!==''){
-            const todo:ITodoItem = {
-                id:Date.now(),
-                title: title,
-                completed:false,
-            }
-            addTodo(todo);
-            setTitle('');
-        }
-    }
+
+
     return (
-            <input className='form'
+        <form className='form' onSubmit={(e: React.FormEvent<HTMLFormElement>) => addTodo(title, e)}>
+            <input className='form-input'
                    onChange={changeHandler}
                    value={title}
-                   onKeyPress={createTodo}
                    id='title' type='text'
-                   placeholder='Enter title of todo' />
+                   placeholder='Enter title of todo'
+                   name='titleName'
+            />
+            <button className='add-button'>Add</button>
+        </form>
     );
 };
