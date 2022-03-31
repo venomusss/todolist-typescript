@@ -13,7 +13,10 @@ export const Form: FC<FormProps> = ({addTodo}) => {
 
 
     return (
-        <form className='form' onSubmit={(e: React.FormEvent<HTMLFormElement>) => addTodo(title, e)}>
+        <form className='form' onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+            addTodo(title, e)
+            setTitle('');
+        }}>
             <input className='form-input'
                    onChange={changeHandler}
                    value={title}

@@ -7,17 +7,19 @@ import {Form} from "./components/Form";
 
 function App() {
     const [todos, setTodos] = useState<ITodoItem[]>([]);
-    const addTodo = (title: string, e:React.FormEvent) => {
+    const addTodo = (title: string, e: React.FormEvent) => {
         e.preventDefault();
-        const todo:ITodoItem = {
-            id:Date.now(),
-            title: title,
-            completed:false,
+        if (title.length > 0) {
+            const todo: ITodoItem = {
+                id: Date.now(),
+                title: title,
+                completed: false,
+            }
+            setTodos([todo, ...todos])
         }
-        setTodos([todo, ...todos])
     }
     const removeTodo = (todo: ITodoItem) => {
-        const newTodo:ITodoItem[] = todos.filter(item => item !== todo);
+        const newTodo: ITodoItem[] = todos.filter(item => item !== todo);
         setTodos(newTodo);
     }
     return (
